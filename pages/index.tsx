@@ -3,9 +3,18 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Grid } from '@mui/material'
+import Box from '@mui/material/Box';
+
 const inter = Inter({ subsets: ['latin'] })
 
 import Navbar from '../components/Navbar'
+import BasicSelect from '../components/BasicSelect';
+import ControlledSwitches from '../components/SwitchToggle';
+import BasicButton from'../components/BasicButtons'
 
 export default function Home() {
   return (
@@ -17,6 +26,63 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar/>
+      <Box sx={{backgroundColor:"#EEEDF6", padding:2}}>
+        <Typography variant="h4" align="center">Create/Edit a Participant Information</Typography>
+      </Box>
+      <Container>
+        <Container maxWidth="md">
+          <Typography variant="h5">Participant Information</Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={10} md={5}>
+              <TextField fullWidth id="first-name" label="First Name" variant="outlined" />
+            </Grid>
+            <Grid item xs={10} md={5}>
+              <TextField fullWidth id="last-name" label="Last Name" variant="outlined" />
+            </Grid>
+            <Grid item xs={10} md={10}>
+              <TextField fullWidth id="email" label="Email" variant="outlined" />
+            </Grid>
+            <Grid item xs={10} md={4}>
+              <TextField fullWidth id="birth-date" label="Date of Birth" variant="outlined" />
+            </Grid>
+            <Grid item xs={4} md={2}>
+              {BasicSelect()}
+            </Grid>
+            <Grid item xs={6} md={4}>
+              <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
+            </Grid>
+            <Grid item xs={10} md={10}>
+              <TextField fullWidth id="city" label="City" variant="outlined" />
+            </Grid>
+            <Grid item xs={5}>
+              {BasicSelect()}
+            </Grid>
+            <Grid item xs={5}>
+              {BasicSelect()}
+            </Grid>
+            <Grid item xs={10} md={4}>
+              <Typography>Enable 2 factor authentication {ControlledSwitches()} </Typography>
+            </Grid>
+            <Grid item xs={4} md={2}>
+              {BasicSelect()}
+            </Grid>
+            <Grid item xs={6} md={4}>
+              <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
+            </Grid>
+            <Grid item xs={10} md={10}>
+            <TextField
+              fullWidth
+              id="healt-condition-notes"
+              label="Health conditions and other notes"
+              multiline
+              rows={4}
+              defaultValue="Please write any relevant notes on participant here"
+              />
+            </Grid>
+          </Grid>
+          <BasicButton/>
+        </Container>
+      </Container>
     </>
   )
 }
