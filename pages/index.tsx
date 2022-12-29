@@ -3,20 +3,44 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 
+import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Grid } from '@mui/material'
 import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const inter = Inter({ subsets: ['latin'] })
 
 import Navbar from '../components/Navbar'
-import BasicSelect from '../components/BasicSelect';
 import ControlledSwitches from '../components/SwitchToggle';
 import BasicButton from'../components/BasicButtons'
 
+
 export default function Home() {
+  const [countryCode, setCountryCode] = React.useState('');
+  const [twoFCountryCode, setTwoFCountryCode] = React.useState('');
+  const [sexAtBirth, setSexAtBirth] = React.useState('');
+  const [pronoun, setPronoun] = React.useState('');
+
+  const handleCountryCodeChange = (event: SelectChangeEvent) => {
+    setCountryCode(event.target.value as string);
+  };
+  const handleTwoFCountryCodeChange = (event: SelectChangeEvent) => {
+    setTwoFCountryCode(event.target.value as string);
+  };
+  const handleSexAtBirthChange = (event: SelectChangeEvent) => {
+    setSexAtBirth(event.target.value as string);
+  };
+  const handlePronounChange = (event: SelectChangeEvent) => {
+    setPronoun(event.target.value as string);
+  };
+
+
   return (
     <>
       <Head>
@@ -27,61 +51,126 @@ export default function Home() {
       </Head>
       <Navbar/>
       <Box sx={{backgroundColor:"#EEEDF6", padding:2}}>
-        <Typography variant="h4" align="center">Create/Edit a Participant Information</Typography>
+        <Typography variant="h1" align="center">Create/Edit a Participant Information</Typography>
       </Box>
-      <Container>
-        <Container maxWidth="md">
-          <Typography variant="h5">Participant Information</Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={10} md={5}>
-              <TextField fullWidth id="first-name" label="First Name" variant="outlined" />
-            </Grid>
-            <Grid item xs={10} md={5}>
-              <TextField fullWidth id="last-name" label="Last Name" variant="outlined" />
-            </Grid>
-            <Grid item xs={10} md={10}>
-              <TextField fullWidth id="email" label="Email" variant="outlined" />
-            </Grid>
-            <Grid item xs={10} md={4}>
-              <TextField fullWidth id="birth-date" label="Date of Birth" variant="outlined" />
-            </Grid>
-            <Grid item xs={4} md={2}>
-              {BasicSelect()}
-            </Grid>
-            <Grid item xs={6} md={4}>
-              <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
-            </Grid>
-            <Grid item xs={10} md={10}>
-              <TextField fullWidth id="city" label="City" variant="outlined" />
-            </Grid>
-            <Grid item xs={5}>
-              {BasicSelect()}
-            </Grid>
-            <Grid item xs={5}>
-              {BasicSelect()}
-            </Grid>
-            <Grid item xs={10} md={4}>
-              <Typography>Enable 2 factor authentication {ControlledSwitches()} </Typography>
-            </Grid>
-            <Grid item xs={4} md={2}>
-              {BasicSelect()}
-            </Grid>
-            <Grid item xs={6} md={4}>
-              <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
-            </Grid>
-            <Grid item xs={10} md={10}>
-            <TextField
-              fullWidth
-              id="healt-condition-notes"
-              label="Health conditions and other notes"
-              multiline
-              rows={4}
-              defaultValue="Please write any relevant notes on participant here"
-              />
-            </Grid>
+      <Container sx={{my:2, maxWidth:'900px', mx:'auto' }}>
+        <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
+          <Grid item xs={10}>
+            <Typography variant="h2" sx={{my:2 }}>Participant Information</Typography>
           </Grid>
-          <BasicButton/>
-        </Container>
+          <Grid item xs={10}>
+            <Typography variant="body1">Ameya ID <span>ABC123</span></Typography>
+          </Grid>
+          <Grid item xs={10} sm={5}>
+            <TextField fullWidth id="first-name" label="First Name" variant="outlined" />
+          </Grid>
+          <Grid item xs={10} sm={5}>
+            <TextField fullWidth id="last-name" label="Last Name" variant="outlined" />
+          </Grid>
+          <Grid item xs={10} sm={10}>
+            <TextField fullWidth id="email" label="Email" variant="outlined" />
+          </Grid>
+          <Grid item xs={10} sm={4}>
+            <TextField fullWidth id="birth-date" label="Date of Birth" variant="outlined" />
+          </Grid>
+          <Grid item xs={4} sm={2}>
+              <Box>
+              <FormControl fullWidth>
+                <InputLabel id="country-code-label">Country Code</InputLabel>
+                <Select
+                  labelId="country-code-label"
+                  id="country-code"
+                  value={countryCode}
+                  label="Country Code"
+                  onChange={handleCountryCodeChange}
+                >
+                  <MenuItem value={1}>+1</MenuItem>
+                  <MenuItem value={2}>+2</MenuItem>
+                  <MenuItem value={3}>+3</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
+          </Grid>
+          <Grid item xs={10} sm={10}>
+            <TextField fullWidth id="city" label="City" variant="outlined" />
+          </Grid>
+          <Grid item xs={5}>
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel id="sex-at-birth-label">Sex Assigned at Birth</InputLabel>
+                <Select
+                  labelId="sex-at-birth-label"
+                  id="sex-at-birth"
+                  value={sexAtBirth}
+                  label="Sex Assigned at Birth"
+                  onChange={handleCountryCodeChange}
+                >
+                  <MenuItem value='sex - male'>male</MenuItem>
+                  <MenuItem value='sex - female'>female</MenuItem>
+                  <MenuItem value='sex - other'>other</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={5}>
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel id="pronoun-label">Preferred Pronoun</InputLabel>
+                <Select
+                  labelId="pronoun-label"
+                  id="pronoun"
+                  value={pronoun}
+                  label="Preferred Pronoun"
+                  onChange={handleCountryCodeChange}
+                >
+                  <MenuItem value='he/him'>he/him</MenuItem>
+                  <MenuItem value='she/her'>she/her</MenuItem>
+                  <MenuItem value='they/them'>they/them</MenuItem>
+                  <MenuItem value='other'>other</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={10} sm={4}>
+            <Typography>Enable 2 factor authentication {ControlledSwitches()} </Typography>
+          </Grid>
+          <Grid item xs={4} sm={2}>
+            <Box>
+              <FormControl fullWidth>
+                <InputLabel id="twof-country-code-label">Country Code</InputLabel>
+                <Select
+                  labelId="twof-country-code-label"
+                  id="twof-country-code"
+                  value={twoFCountryCode}
+                  label="Country Code"
+                  onChange={handleTwoFCountryCodeChange}
+                >
+                  <MenuItem value={1}>+1</MenuItem>
+                  <MenuItem value={2}>+2</MenuItem>
+                  <MenuItem value={3}>+3</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <TextField fullWidth id="phone-number" label="Phone Number" variant="outlined" />
+          </Grid>
+          <Grid item xs={10} sm={10}>
+          <TextField
+            fullWidth
+            id="healt-condition-notes"
+            label="Health conditions and other notes..."
+            multiline
+            rows={4}
+            />
+          </Grid>
+          <Grid item>
+            <BasicButton/>
+          </Grid>
+        </Grid>
       </Container>
     </>
   )

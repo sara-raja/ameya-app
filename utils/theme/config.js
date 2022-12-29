@@ -15,11 +15,29 @@ const themeOptions = {
           primary: '#1F1769',
           secondary: '#8F5FCA',
           disabled: '#EEEDF6',
+          hint: '#1F1769',
         },
         divider: '#EEEDF6',
       },
     typography: {
-        fontFamily:'Cabin'
+        fontFamily:'Cabin',
+        // color:'#1F1769',
+        h1: {
+          fontSize: 24,
+          fontWeight: 700,
+        },
+        h2: {
+          fontSize: 24,
+          fontWeight: 700,
+        },
+        body1: {
+          fontSize: 18,
+        },
+        button: {
+          fontSize: 24,
+          textTransform: 'capitalize',
+          padding:'1rem 2rem',
+        },
       },
   };
   
