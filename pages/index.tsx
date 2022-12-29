@@ -17,9 +17,9 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 const inter = Inter({ subsets: ['latin'] })
 
 import Navbar from '../components/Navbar'
-import ControlledSwitches from '../components/SwitchToggle';
+import SwitchToggle from '../components/SwitchToggle';
 import BasicButton from'../components/BasicButtons'
-
+// import SwitchTest from '../components/SwitchTest'
 
 export default function Home() {
   const [countryCode, setCountryCode] = React.useState('');
@@ -40,7 +40,6 @@ export default function Home() {
     setPronoun(event.target.value as string);
   };
 
-
   return (
     <>
       <Head>
@@ -59,7 +58,7 @@ export default function Home() {
             <Typography variant="h2" sx={{my:2 }}>Participant Information</Typography>
           </Grid>
           <Grid item xs={10}>
-            <Typography variant="body1">Ameya ID <span>ABC123</span></Typography>
+            <Typography variant="body1">Ameya ID <span style={{fontWeight:'bold', marginLeft:8}}>ABC123</span></Typography>
           </Grid>
           <Grid item xs={10} sm={5}>
             <TextField fullWidth id="first-name" label="First Name" variant="outlined" />
@@ -83,6 +82,7 @@ export default function Home() {
                   value={countryCode}
                   label="Country Code"
                   onChange={handleCountryCodeChange}
+                  inputProps={{MenuProps: {disableScrollLock: true}}}
                 >
                   <MenuItem value={1}>+1</MenuItem>
                   <MenuItem value={2}>+2</MenuItem>
@@ -106,11 +106,12 @@ export default function Home() {
                   id="sex-at-birth"
                   value={sexAtBirth}
                   label="Sex Assigned at Birth"
-                  onChange={handleCountryCodeChange}
+                  onChange={handleSexAtBirthChange}
+                  inputProps={{MenuProps: {disableScrollLock: true}}}
                 >
-                  <MenuItem value='sex - male'>male</MenuItem>
-                  <MenuItem value='sex - female'>female</MenuItem>
-                  <MenuItem value='sex - other'>other</MenuItem>
+                  <MenuItem value='male'>male</MenuItem>
+                  <MenuItem value='female'>female</MenuItem>
+                  <MenuItem value='other'>other</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -124,7 +125,8 @@ export default function Home() {
                   id="pronoun"
                   value={pronoun}
                   label="Preferred Pronoun"
-                  onChange={handleCountryCodeChange}
+                  onChange={handlePronounChange}
+                  inputProps={{MenuProps: {disableScrollLock: true}}}
                 >
                   <MenuItem value='he/him'>he/him</MenuItem>
                   <MenuItem value='she/her'>she/her</MenuItem>
@@ -135,7 +137,7 @@ export default function Home() {
             </Box>
           </Grid>
           <Grid item xs={10} sm={4}>
-            <Typography>Enable 2 factor authentication {ControlledSwitches()} </Typography>
+            <Typography>Enable 2 factor authentication <SwitchToggle/> </Typography>
           </Grid>
           <Grid item xs={4} sm={2}>
             <Box>
@@ -147,6 +149,7 @@ export default function Home() {
                   value={twoFCountryCode}
                   label="Country Code"
                   onChange={handleTwoFCountryCodeChange}
+                  inputProps={{MenuProps: {disableScrollLock: true}}}
                 >
                   <MenuItem value={1}>+1</MenuItem>
                   <MenuItem value={2}>+2</MenuItem>
